@@ -1,0 +1,173 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://src/actors/data/img/player_idle.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/Player.gd" type="Script" id=2]
+[ext_resource path="res://src/actors/data/img/player_run.png" type="Texture" id=3]
+[ext_resource path="res://src/actors/data/img/player_jump.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 192, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 192, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 192, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 64, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 128, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 128, 64 )
+
+[sub_resource type="SpriteFrames" id=24]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 19 ) ],
+"loop": true,
+"name": "fall",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": false,
+"name": "jump",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 10, 22.25 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 11.0962, 22.3289 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Platform_Detector" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 5 )
+
+[node name="Aiming" type="Node2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Aiming"]
+frames = SubResource( 24 )
+animation = "jump"
+frame = 2
+playing = true
+
+[node name="Detection" type="Node2D" parent="Aiming"]
+position = Vector2( 0, 32 )
+
+[node name="Area2D" type="Area2D" parent="Aiming/Detection"]
+position = Vector2( 22, -23 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aiming/Detection/Area2D"]
+shape = SubResource( 26 )
+
+[node name="ColorRect" type="ColorRect" parent="Aiming/Detection/Area2D"]
+margin_left = -7.0
+margin_top = -16.0
+margin_right = 7.0
+margin_bottom = 16.0
+color = Color( 1, 0.167969, 0.167969, 0.392157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2( 0, -25 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 9.5
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -22.981 )
+shape = SubResource( 25 )
